@@ -63,4 +63,30 @@ public class Solution {
         return result;
         
     }
+
+    // using stack
+    public int[] nextGreaterElement(int[] findNums, int[] nums) {
+
+    	Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+    	Stack<Integer> stack = new Stack<>();
+
+    	for (int num: nums) {
+    		while (!stack.isEmpty() && stack.peek()<num) {
+    			map.put(stack.pop(), num);
+    		}
+    		stack.push(nums);
+    	}
+
+    	for (int i = 0; i<findNums.length; i++) {
+    		if (map.containsKey(findNums[i])) {
+    			findNums[i] = map.get(findNums[i]);
+    		}
+    		else {
+    			findNums[i] = -1;
+    		}
+    	}
+
+    	return findNums;
+    }
 }
